@@ -8,11 +8,6 @@ import { CAT_FACT_URL } from "./consts"
  * It fetches cat facts from the API and displays them.
  */
 function App() {
-  /**
-   * A custom hook that fetches data from an API endpoint.
-   * @param url The URL of the API endpoint.
-   * @returns An object containing the fetched data, loading status, and error.
-   */
   const { data, isLoading, error } = useFetch<Fact[]>(CAT_FACT_URL);
 
   /**
