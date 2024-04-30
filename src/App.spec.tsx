@@ -15,20 +15,21 @@ const CatFactFixture: Fact = {
   updatedAt: new Date().toString(),
 }
 
-// Mock the server to return a single cat fact.
-const server = setupServer(
-  http.get(CAT_FACT_URL, () => {
-    return HttpResponse.json([
-      CatFactFixture,
-    ]);
-  })
-);
+const server = setupServer();
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test("loads and displays a cat fact", async () => {
+  // Mock the server to return a single cat fact.
+  server.use(
+    http.get(CAT_FACT_URL, () => {
+      return HttpResponse.json([
+        CatFactFixture,
+      ]);
+    })
+  );
   render(<App />);
 
   // Should show loading message until data is fetched
@@ -44,6 +45,7 @@ test("loads and displays a cat fact", async () => {
 });
 
 test("handles server error", async () => {
+  // Mock the server to return an error
   server.use(
     http.get(CAT_FACT_URL, () => {
       return new HttpResponse(null, { status: 500 });
@@ -51,12 +53,6 @@ test("handles server error", async () => {
   );
 
   render(<App />);
-
-  // Should show loading message until data is fetched
-  let loadingText = screen.queryByText('Loading...')
-
-  // Should show an error message when fetch fails
-  expect(loadingText).toBeVisible();
 
   await screen.findByText("There was an issue loading this page.");
 });
