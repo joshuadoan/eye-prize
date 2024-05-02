@@ -3,10 +3,7 @@ import { setupServer } from "msw/node";
 import { render, screen } from "@testing-library/react";
 import { afterAll, afterEach, beforeAll, expect, test } from "vitest";
 import "@testing-library/jest-dom";
-
-import App from "./App";
-import { CAT_FACT_URL } from "./consts";
-import { Fact } from "./types";
+import App, { CAT_FACT_URL, Fact } from "./App";
 
 // Mock cat fact response
 const CatFactFixture: Fact = {
