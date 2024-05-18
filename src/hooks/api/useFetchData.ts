@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer } from "react";
 import appReducer from "./fetchDataReducer";
 import { ActionType, State } from "../../types";
 import { fetchData } from "./fetchData";
