@@ -7,9 +7,18 @@ import { debounce } from "./utils/debounce";
 import useFetchData from "./hooks/api/useFetchData";
 
 function App() {
-  const { isLoading, error, data, totalPages, currentPage, setSearchTerm, setCurrentPage, searchTerm } = useFetchData()
+  const {
+    isLoading,
+    error,
+    data,
+    totalPages,
+    currentPage,
+    setSearchTerm,
+    setCurrentPage
+  } = useFetchData()
 
-  const debouncedSetSearchTerm = debounce(setSearchTerm, 1000)
+  const debouncedSetSearchTerm = debounce(setSearchTerm, 1000);
+
   if (error) {
     return <main className="h-screen flex justify-center items-center">{error.message}</main>
   }
@@ -30,7 +39,6 @@ function App() {
         }
         {
           !data.length && <li className="p-2">No data found</li>
-
         }
       </ul>
       <Pagination
