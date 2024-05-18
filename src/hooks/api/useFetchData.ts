@@ -16,7 +16,6 @@ const defaultAppState: State = {
 };
 
 export default function useAppState() {
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>();
   const [state, dispatch] = useReducer(appReducer, defaultAppState);
 
   useEffect(() => {
@@ -47,10 +46,6 @@ export default function useAppState() {
       isLoading: true,
     });
     fetch();
-
-    return () => {
-      debounceRef.current && clearTimeout(debounceRef.current);
-    };
   }, [state.currentPage, state.searchTerm]);
 
   return {
